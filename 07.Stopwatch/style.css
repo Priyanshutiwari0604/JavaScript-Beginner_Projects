@@ -1,0 +1,290 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 20px;
+    color: #e4e4e7;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #f4f4f5;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 480px;
+    max-width: 600px;
+}
+
+#display {
+    font-size: 4rem;
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+    font-weight: 400;
+    color: #f8fafc;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 2rem;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 360px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#display.running {
+    color: #34d399;
+    background: 
+        linear-gradient(135deg, rgba(52, 211, 153, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+    border-color: rgba(52, 211, 153, 0.2);
+    box-shadow: 
+        0 0 24px rgba(52, 211, 153, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+#controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 100px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#start {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+#start:hover:not(:disabled) {
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+#start.stop {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+#start.stop:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+#reset {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: white;
+    box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+}
+
+#reset:hover:not(:disabled) {
+    background: linear-gradient(135deg, #4b5563, #374151);
+    box-shadow: 0 6px 16px rgba(107, 114, 128, 0.4);
+}
+
+#lap {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+#lap:hover:not(:disabled) {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+#lap-times {
+    width: 100%;
+    max-height: 240px;
+    overflow-y: auto;
+    margin-top: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+#lap-times::-webkit-scrollbar {
+    width: 6px;
+}
+
+#lap-times::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+#lap-times::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5);
+    border-radius: 3px;
+}
+
+#lap-times::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.7);
+}
+
+.lap-time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'SF Mono', 'Monaco', monospace;
+    font-weight: 400;
+    color: #e4e4e7;
+    animation: lapSlideIn 0.3s ease-out;
+    position: relative;
+}
+
+.lap-time::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 0 12px 12px 0;
+}
+
+.lap-time:nth-child(odd)::before {
+    background: linear-gradient(135deg, #10b981, #3b82f6);
+}
+
+.lap-number {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.lap-duration {
+    font-size: 1rem;
+    color: #f8fafc;
+    font-weight: 500;
+}
+
+@keyframes lapSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 700px) {
+    h1 {
+        font-size: 2rem;
+        letter-spacing: 4px;
+    }
+    
+    #container {
+        min-width: 320px;
+        padding: 2rem;
+    }
+    
+    #display {
+        font-size: 3rem;
+        min-width: 280px;
+    }
+    
+    #controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+        letter-spacing: 2px;
+    }
+    
+    #container {
+        min-width: 280px;
+        padding: 1.5rem;
+    }
+    
+    #display {
+        font-size: 2.5rem;
+        min-width: 240px;
+        padding: 1rem 1.5rem;
+    }
+    
+    button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+    }
+}
