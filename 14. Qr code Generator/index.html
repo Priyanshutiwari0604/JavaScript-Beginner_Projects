@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-qrcode"></i> QR Code Generator</h1>
+            <p>Create QR codes for URLs, text, contacts, and more</p>
+        </header>
+        
+        <main>
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="qr-text">Enter text or URL</label>
+                    <input type="text" id="qr-text" placeholder="https://example.com or any text">
+                </div>
+                
+                <div class="options-group">
+                    <div class="option">
+                        <label for="qr-size">QR Code Size</label>
+                        <select id="qr-size">
+                            <option value="150">Small (150x150)</option>
+                            <option value="200" selected>Medium (200x200)</option>
+                            <option value="250">Large (250x250)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option">
+                        <label for="qr-type">Content Type</label>
+                        <select id="qr-type">
+                            <option value="url">URL</option>
+                            <option value="text">Text</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="generate-btn" class="generate-button">
+                    <i class="fas fa-bolt"></i> Generate QR Code
+                </button>
+            </div>
+            
+            <div class="result-section">
+                <div class="qr-placeholder">
+                    <i class="fas fa-qrcode"></i>
+                    <p>Your QR code will appear here</p>
+                </div>
+                
+                <div class="qr-result hidden">
+                    <canvas id="qr-canvas"></canvas>
+                    <div class="qr-actions">
+                        <button id="download-btn" class="action-button">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                        <button id="share-btn" class="action-button">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2023 QR Code Generator | Scan with any smartphone camera</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.4.4/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
